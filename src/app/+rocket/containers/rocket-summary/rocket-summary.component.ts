@@ -12,7 +12,7 @@ import { SpaceState, GetAllRockets } from '../../../store/space-state';
 export class RocketSummaryComponent implements OnInit {
   @Select(SpaceState) space$: Observable<any>;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.store.dispatch(new GetAllRockets());

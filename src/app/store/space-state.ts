@@ -1,6 +1,7 @@
 import { State, Action, StateContext } from '@ngxs/store';
-import { SpaceService } from '../shared/services/space.service';
 import { tap } from 'rxjs/operators';
+
+import { SpaceService } from '../shared/services/space.service';
 
 export class GetLaunches {
   static readonly type = '[Space] GetLaunches';
@@ -19,6 +20,7 @@ export class GetRocketById {
 export interface SpaceStateModel {
   launches: Array<any>;
   rockets: Array<any>;
+  activeRocket: {} | null;
 }
 
 @State<SpaceStateModel>({
@@ -26,6 +28,7 @@ export interface SpaceStateModel {
   defaults: {
     launches: [],
     rockets: [],
+    activeRocket: null,
   },
 })
 export class SpaceState {
@@ -43,5 +46,15 @@ export class SpaceState {
     return this.spaceService
       .getAllRockets()
       .pipe(tap((res) => patchState({ rockets: res })));
+  }
+
+  @Action(GetRocketById)
+  getRocketById(
+    { patchState }: StateContext<SpaceStateModel>,
+    { payload }: GetRocketById,
+  ) {
+    return this.spaceService
+      .getRocketById(payload)
+      .pipe(tap((res) => patchState({ activeRocket: res })));
   }
 }

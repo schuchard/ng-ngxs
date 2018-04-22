@@ -1,3 +1,7 @@
-<p>
-  rocket-detail works!
-</p>
+<h1>rocket-detail works!</h1>
+<div *ngIf="activeRocket$ | async as rocket">
+  <h2>{{rocket.name}}</h2>
+  <p>{{rocket.description}}</p>
+  <ul>
+  </ul>
+</div>
