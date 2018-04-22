@@ -1,4 +1,8 @@
-<p>
-  rocket-summary works!
-  {{(space$ | async).rockets | json}}
-</p>
+<h1>Rocket Summary</h1>
+<div>
+  <ul *ngFor="let r of (space$ | async).rockets">
+    <li>{{r.name}}</li>
+    <li>{{r.active}}</li>
+    <li>{{r.success_rate_pct}}</li>
+  </ul>
+</div>
