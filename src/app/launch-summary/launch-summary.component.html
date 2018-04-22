@@ -1,11 +1,11 @@
-<div>
-  <h1>Space X Launches</h1>
-  <ul *ngFor="let l of (space$ | async).launches">
-    <li>{{l.flight_number}}</li>
-    <li>{{l.launch_date_utc}}</li>
-    <li><a [routerLink]="['/rockets', l.rocket.rocket_id]">{{l.rocket.rocket_name}}</a></li>
-    <li>{{l.rocket.rocket_type}}</li>
-    <li>{{l.launch_site.site_name_long}}</li>
-    <li>{{l.launch_success}}</li>
+<h1>Space X Launches</h1>
+<div *ngFor="let l of (space$ | async).launches">
+  <ul>
+    <li>Flight: {{l.flight_number}}</li>
+    <li>Launch date: {{l.launch_date_utc}}</li>
+    <li>Rocket: <a [routerLink]="['/rockets', l.rocket.rocket_id]">{{l.rocket.rocket_name}}</a></li>
+    <li>Launch site: {{l.launch_site.site_name_long}}</li>
+    <li>Launch success: {{l.launch_success}}</li>
   </ul>
+  <img src="{{l.links.mission_patch_small}}" alt="">
 </div>
