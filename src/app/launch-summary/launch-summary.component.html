@@ -3,7 +3,7 @@
   <ul *ngFor="let l of (space$ | async).launches">
     <li>{{l.flight_number}}</li>
     <li>{{l.launch_date_utc}}</li>
-    <li>{{l.rocket.rocket_name}}</li>
+    <li><a [routerLink]="['/rockets', l.rocket.rocket_id]">{{l.rocket.rocket_name}}</a></li>
     <li>{{l.rocket.rocket_type}}</li>
     <li>{{l.launch_site.site_name_long}}</li>
     <li>{{l.launch_success}}</li>

@@ -10,7 +10,7 @@ const routes: Routes = [
     component: LaunchSummaryComponent
   },
   {
-    path: 'rocket',
+    path: 'rockets',
     loadChildren: rocketModulePath
   }
 ];

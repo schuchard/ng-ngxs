@@ -7,12 +7,11 @@ import { SharedModule } from './shared/shared.module';
 
 import { SpaceState } from './store/space-state';
 import { AppRoutingModule } from './app-routing.module';
-import { RocketModule } from './+rocket/rocket.module';
 import { LaunchSummaryComponent } from './launch-summary/launch-summary.component';
 
 @NgModule({
   declarations: [AppComponent, LaunchSummaryComponent],
-  imports: [BrowserModule, AppRoutingModule, NgxsModule.forRoot([SpaceState]), SharedModule, RocketModule],
+  imports: [BrowserModule, AppRoutingModule, NgxsModule.forRoot([SpaceState]), SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })
