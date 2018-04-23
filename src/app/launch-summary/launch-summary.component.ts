@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
-import { GetLaunches, SpaceState } from '../store/space-state';
-import { Router,  } from '@angular/router';
+import { GetLaunches } from '../store/space-state';
 
 @Component({
   selector: 'app-launches',
@@ -10,17 +9,11 @@ import { Router,  } from '@angular/router';
   styleUrls: ['./launch-summary.component.css']
 })
 export class LaunchSummaryComponent implements OnInit {
-  @Select(SpaceState) space$: Observable<any>;
+  @Select(state => state.space.launches) launches$: Observable<any>;
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.store.dispatch(new GetLaunches());
-  }
-
-  viewRocket(rocket) {
-    if (rocket) {
-      this.router.navigate(['/rockets', rocket]);
-    }
   }
 }

@@ -1,5 +1,5 @@
 <h1>Rocket Summary</h1>
-<div *ngFor="let r of (space$ | async).rockets">
+<div *ngFor="let r of (rockets$ | async)">
   <h2><a [routerLink]="['/rockets', r.id]">{{r.name}}</a></h2>
   <ul >
     <li>Is active: {{r.active}}</li>
