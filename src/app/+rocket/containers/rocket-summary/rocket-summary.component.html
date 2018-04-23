@@ -1,8 +1,8 @@
 <h1>Rocket Summary</h1>
-<div>
-  <ul *ngFor="let r of (space$ | async).rockets">
-    <li>{{r.name}}</li>
-    <li>{{r.active}}</li>
-    <li>{{r.success_rate_pct}}</li>
+<div *ngFor="let r of (space$ | async).rockets">
+  <h2><a [routerLink]="['/rockets', r.id]">{{r.name}}</a></h2>
+  <ul >
+    <li>Is active: {{r.active}}</li>
+    <li>Success rate: {{r.success_rate_pct}}%</li>
   </ul>
 </div>
