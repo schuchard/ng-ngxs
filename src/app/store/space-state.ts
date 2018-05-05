@@ -36,9 +36,13 @@ export class SpaceState {
 
   @Action(GetLaunches)
   getLaunches({ patchState }: StateContext<SpaceStateModel>) {
-    return this.spaceService
-      .getAllLaunches()
-      .pipe(tap((res) => patchState({ launches: res })));
+    return this.spaceService.getAllLaunches().pipe(
+      tap((res) => {
+        console.log('GetLaunches server response');
+
+        return patchState({ launches: res });
+      }),
+    );
   }
 
   @Action(GetAllRockets)
