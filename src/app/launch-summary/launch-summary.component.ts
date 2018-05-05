@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { GetLaunches } from '../store/space-state';
 
 @Component({
