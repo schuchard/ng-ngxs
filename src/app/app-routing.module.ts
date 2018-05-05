@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LaunchSummaryComponent } from './launch-summary/launch-summary.component';
 
-export const rocketModulePath = 'app/+rocket/rocket.module#RocketModule';
-
 const routes: Routes = [
   {
     path: '',
@@ -11,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'rockets',
-    loadChildren: rocketModulePath
+    loadChildren: 'app/+rocket/rocket.module#RocketModule'
   }
 ];
 
