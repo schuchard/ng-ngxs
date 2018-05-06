@@ -1,0 +1,24 @@
+<div class="luxbar luxbar-static">
+  <input #mobileNavMenuBtn type="checkbox" id="luxbar-checkbox" class="luxbar-checkbox">
+  <div class="luxbar-menu luxbar-menu-left luxbar-menu-material-bluegrey">
+    <ul class="luxbar-navigation">
+      <li class="luxbar-header">
+        <a class="luxbar-brand" [routerLink]="['/']" (click)="mobileNavClick(mobileNavMenuBtn)">SpaceX</a>
+        <label class="luxbar-hamburger luxbar-hamburger-spin" for="luxbar-checkbox">
+          <span></span>
+        </label>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="luxbar-item">
+        <a [routerLink]="['/']" (click)="mobileNavClick(mobileNavMenuBtn)">Launches</a>
+      </li>
+      <li routerLinkActive="active" class="luxbar-item dropdown">
+        <a [routerLink]="['/rockets']" (click)="mobileNavClick(mobileNavMenuBtn)">Rockets</a>
+        <ul>
+          <li class="luxbar-item" *ngFor="let rocket of rocketIds$ | async">
+            <a [routerLink]="['/rockets', rocket.id]" (click)="mobileNavClick(mobileNavMenuBtn)">{{rocket.name}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

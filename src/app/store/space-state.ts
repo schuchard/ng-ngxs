@@ -1,20 +1,21 @@
-import { State, Action, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
+
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 
 import { SpaceService } from '../shared/services/space.service';
 
-export class GetLaunches {
-  static readonly type = '[Space] GetLaunches';
+export class GetAllLaunches {
+  static readonly type = '[Space] GetAllLaunches';
 }
 
 export class GetAllRockets {
-  static readonly type = '[Space] GetAllLaunches';
+  static readonly type = '[Space] GetAllRockets';
 }
 
 export class GetRocketById {
   static readonly type = '[Space] GetRocketById';
 
-  constructor(public payload: number) {}
+  constructor(public payload: number | null) {}
 }
 
 export interface SpaceStateModel {
@@ -34,7 +35,14 @@ export interface SpaceStateModel {
 export class SpaceState {
   constructor(private spaceService: SpaceService) {}
 
-  @Action(GetLaunches)
+  @Selector()
+  static allRocketIds(state: SpaceStateModel) {
+    return !state.rockets.length
+      ? []
+      : state.rockets.map((r) => ({ id: r.id, name: r.name }));
+  }
+
+  @Action(GetAllLaunches)
   getLaunches({ patchState }: StateContext<SpaceStateModel>) {
     return this.spaceService.getAllLaunches().pipe(
       tap((res) => {
@@ -57,6 +65,10 @@ export class SpaceState {
     { patchState }: StateContext<SpaceStateModel>,
     { payload }: GetRocketById,
   ) {
+    if (payload === null) {
+      return patchState({ activeRocket: null });
+    }
+
     return this.spaceService
       .getRocketById(payload)
       .pipe(tap((res) => patchState({ activeRocket: res })));

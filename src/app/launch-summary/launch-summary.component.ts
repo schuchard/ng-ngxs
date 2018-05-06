@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Actions, Store, Select, ofActionSuccessful } from '@ngxs/store';
-import { GetLaunches } from '../store/space-state';
+import { Actions, Select, ofActionSuccessful } from '@ngxs/store';
+import { GetAllLaunches } from '../store/space-state';
 
 @Component({
   selector: 'app-launches',
@@ -15,13 +15,11 @@ export class LaunchSummaryComponent implements OnInit, OnDestroy {
   @Select((state) => state.space.launches)
   launches$: Observable<any>;
 
-  constructor(private store: Store, private actions: Actions) {}
+  constructor(private actions: Actions) {}
 
   ngOnInit() {
-    this.store.dispatch(new GetLaunches());
-
     this.launchSuccess$ = this.actions
-      .pipe(ofActionSuccessful(GetLaunches))
+      .pipe(ofActionSuccessful(GetAllLaunches))
       .subscribe(() => console.log('GetLaunches finished'));
   }
 
